@@ -1,0 +1,19 @@
+{
+    "name": "utvarp/wp-utvarp",
+    "type": "wordpress-plugin",
+    "description": "Facilitates the integration of Útvarp's services into WordPress.",
+    "keywords": ["utvarp","wordpress", "plugin", "radio"],
+    "homepage": "https://github.com/Utvarp/wp-utvarp",
+    "license": "MPL-2.0",
+    "authors": [
+        {
+            "name": "Jean-Philippe Murray",
+            "email": "jp@utvarp.co",
+            "homepage": "http://utvarp.co",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    }
+}
