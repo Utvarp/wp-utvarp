@@ -17,11 +17,13 @@ class Utvarp
 
         $this->load_dependencies();
         $this->define_admin_hooks();
+        $this->define_shortcodes_hooks();
     }
  
     private function load_dependencies()
     {
         require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-utvarp-admin.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'shortcodes/class-utvarp-shortcodes.php';
  
         require_once plugin_dir_path(__FILE__) . 'class-utvarp-loader.php';
 
@@ -34,6 +36,12 @@ class Utvarp
         $this->loader->add_action('admin_enqueue_scripts', $admin, 'enqueue_styles');
         $this->loader->add_action('admin_init', $admin, 'settings_init');
         $this->loader->add_action('admin_menu', $admin, 'add_setting_page');
+    }
+
+    private function define_shortcodes_hooks()
+    {
+        $shortcodes = new Utvarp_Shortcodes($this->get_version());
+        $this->loader->add_action('init', $shortcodes, 'init_shortcodes');
     }
  
     public function run()
