@@ -24,8 +24,8 @@ class Utvarp_Admin
     public function settings_init()
     {
         register_setting('utvarp', 'utvarp_api_key');
-        register_setting('utvarp', 'utvarp_stage_api', ['default' => 0]);
-        register_setting('utvarp', 'utvarp_station_uuid', ['default' => null]);
+        register_setting('utvarp', 'utvarp_stage_api');
+        register_setting('utvarp', 'utvarp_station_uuid');
 
         add_settings_section(
             'utvarp_api_section',
