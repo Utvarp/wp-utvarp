@@ -44,10 +44,10 @@ class Utvarp
  
     private function define_admin_hooks()
     {
-        $admin = new Utvarp_Admin($this->get_version());
+        $admin = new Utvarp_Admin($this->get_version(), $this->api);
         $this->loader->add_action('admin_enqueue_scripts', $admin, 'enqueue_styles');
         $this->loader->add_action('admin_init', $admin, 'settings_init');
-        $this->loader->add_action('admin_menu', $admin, 'add_setting_page');
+        $this->loader->add_action('admin_menu', $admin, 'add_utvarp_admin_pages');
     }
 
     private function define_shortcodes_hooks()
