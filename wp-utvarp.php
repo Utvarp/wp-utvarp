@@ -20,7 +20,7 @@
 * Author URI: https://utvarp.co
 * Version: 0.0.1
 * Plugin URI: https://github.com/Utvarp/wp-utvarp
-* Text Domain: wputvarp
+* Text Domain: utvarp
 * Domain Path:  /languages
 * License: MPL-2.0
 */

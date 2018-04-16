@@ -17,7 +17,7 @@ class Utvarp
 
         $this->load_dependencies();
         $this->define_admin_hooks();
-        $this->add_admin_menus();
+        // $this->add_setting_page();
     }
  
     private function load_dependencies()
@@ -33,13 +33,16 @@ class Utvarp
     {
         $admin = new Utvarp_Admin($this->get_version());
         $this->loader->add_action('admin_enqueue_scripts', $admin, 'enqueue_styles');
+        $this->loader->add_action('admin_init', $admin, 'settings_init');
+        $this->loader->add_action('admin_menu', $admin, 'add_setting_page');
     }
 
-    private function add_admin_menus()
-    {
-        $admin = new Utvarp_Admin($this->get_version());
-        $admin->add_option_page();
-    }
+    // private function add_setting_page()
+    // {
+    //     $admin = new Utvarp_Admin($this->get_version());
+    //     $admin->settings_init();
+    //     // $admin->add_setting_page();
+    // }
  
     public function run()
     {

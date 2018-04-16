@@ -20,18 +20,66 @@ class Utvarp_Admin
             false
         );
     }
- 
-    public function add_option_page()
-    {
 
+    public function settings_init()
+    {
+        register_setting('utvarp', 'utvarp_api_key');
+        register_setting('utvarp', 'utvarp_stage_api', ['default' => 0]);
+
+        add_settings_section(
+            'utvarp_api_section',
+            __('API Informations', 'utvarp'),
+            array( $this, 'render_api_section' ),
+            'utvarp'
+        );
+
+        add_settings_field(
+            'utvarp_api_key', // as of WP 4.6 this value is used only internally
+            __('Api Key', 'utvarp'),
+            array( $this, 'render_api_field' ),
+            'utvarp',
+            'utvarp_api_section'
+        );
+
+        add_settings_field(
+            'utvarp_stage_api', // as of WP 4.6 this value is used only internally
+            __('Use staging API (development only)', 'utvarp'),
+            array( $this, 'render_stage_api_field' ),
+            'utvarp',
+            'utvarp_api_section'
+        );
+    }
+
+    public function render_api_section()
+    {
+        require_once plugin_dir_path(__FILE__) . 'partials/utvarp-settings-api-section.php';
+    }
+
+    public function render_api_field()
+    {
+        require_once plugin_dir_path(__FILE__) . 'partials/utvarp-settings-api-field.php';
+    }
+
+    public function render_stage_api_field()
+    {
+        require_once plugin_dir_path(__FILE__) . 'partials/utvarp-settings-stage-api-field.php';
+    }
+
+    public function add_setting_page()
+    {
         add_menu_page(
-            'Utvarp',
+            "Útvarp's options",
             'Útvarp',
             'manage_options',
-            plugin_dir_path(__FILE__) . 'partials/utvarp-admin-page.php',
-            null,
+            'utvarp',
+            array( $this, 'render_utvarp_setting_page' ),
             plugin_dir_url(__FILE__) . 'images/radio-icon-by-Catalin-Fertu-from-flaticon.png',
             81
         );
+    }
+
+    public function render_utvarp_setting_page()
+    {
+        require_once plugin_dir_path(__FILE__) . 'partials/utvarp-settings-page.php';
     }
 }
