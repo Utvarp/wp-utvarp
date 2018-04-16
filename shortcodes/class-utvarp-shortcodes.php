@@ -4,18 +4,12 @@ class Utvarp_Shortcodes
 {
  
     protected $version;
-    protected $base_api_url;
+    protected $api;
  
-    public function __construct($version)
+    public function __construct($version, $api)
     {
         $this->version = $version;
-
-        $api_urls = [
-            'staging' => "https://stage.utvarp.co/api",
-            'live' => "https://app.utvarp.co/api",
-        ];
-
-        $this->base_api_url = get_option('utvarp_stage_api') == 1 ? $api_urls['staging'] : $api_urls['live'];
+        $this->api = $api;
     }
 
     public function init_shortcodes()
@@ -25,6 +19,10 @@ class Utvarp_Shortcodes
 
     public function get_rss_link_shortcode($attributes)
     {
-        return "attribute: {$attributes['id']}";
+        if ($this->api->isOk() !== true) {
+            return $this->api->isOk();
+        }
+        
+        return $this->api->getShow($attributes['uuid'])->podcasts_rss_url;
     }
 }
