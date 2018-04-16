@@ -25,6 +25,7 @@ class Utvarp_Admin
     {
         register_setting('utvarp', 'utvarp_api_key');
         register_setting('utvarp', 'utvarp_stage_api', ['default' => 0]);
+        register_setting('utvarp', 'utvarp_station_uuid', ['default' => null]);
 
         add_settings_section(
             'utvarp_api_section',
@@ -34,7 +35,7 @@ class Utvarp_Admin
         );
 
         add_settings_field(
-            'utvarp_api_key', // as of WP 4.6 this value is used only internally
+            'utvarp_api_key',
             __('Api Key', 'utvarp'),
             array( $this, 'render_api_field' ),
             'utvarp',
@@ -42,7 +43,15 @@ class Utvarp_Admin
         );
 
         add_settings_field(
-            'utvarp_stage_api', // as of WP 4.6 this value is used only internally
+            'utvarp_station_uuid',
+            __("Your station's indentifier", 'utvarp'),
+            array( $this, 'render_station_uuid_field' ),
+            'utvarp',
+            'utvarp_api_section'
+        );
+
+        add_settings_field(
+            'utvarp_stage_api',
             __('Use staging API (development only)', 'utvarp'),
             array( $this, 'render_stage_api_field' ),
             'utvarp',
@@ -53,6 +62,11 @@ class Utvarp_Admin
     public function render_api_section()
     {
         require_once plugin_dir_path(__FILE__) . 'partials/utvarp-settings-api-section.php';
+    }
+
+    public function render_station_uuid_field()
+    {
+        require_once plugin_dir_path(__FILE__) . 'partials/utvarp-settings-uuid-field.php';
     }
 
     public function render_api_field()
