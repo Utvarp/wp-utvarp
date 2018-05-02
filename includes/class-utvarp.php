@@ -9,7 +9,7 @@ class Utvarp
  
     protected $version;
 
-    protected $api;
+    public $api;
  
     public function __construct()
     {

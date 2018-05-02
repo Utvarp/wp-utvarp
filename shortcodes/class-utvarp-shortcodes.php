@@ -26,13 +26,4 @@ class Utvarp_Shortcodes
         
         return $this->api->getShow($attributes['uuid'])->podcasts_rss_url;
     }
-
-    public function get_station_infos($attributes)
-    {
-        if ($this->api->isOk() !== true) {
-            return $this->api->isOk();
-        }
-        
-        return $this->api->getStation();
-    }
 }
