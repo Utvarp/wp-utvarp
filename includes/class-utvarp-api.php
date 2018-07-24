@@ -113,4 +113,15 @@ class Utvarp_Api
     {
         return $this->call("/shows/{$uuid}/logs/{$log}/entries");
     }
+
+    /**
+     * Get a station's musical entries for a specified date range
+     * @param  string $start The date time string of the start of the search
+     * @param  string $end The date time string of the end of the search
+     * @return array
+     */
+    public function getStationMusicalEntries($start, $end)
+    {
+        return $this->call("/entries/from:{$start}/to:{$end}");
+    }
 }
