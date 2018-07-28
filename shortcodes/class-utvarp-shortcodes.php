@@ -14,11 +14,10 @@ class Utvarp_Shortcodes
 
     public function init_shortcodes()
     {
-        add_shortcode('utvarp_get_station_infos', [$this, 'get_station_infos']);
-        add_shortcode('utvarp_get_rss_link', [$this, 'get_rss_link_shortcode']);
+        add_shortcode('utvarp_get_rss_link', [$this, 'getRSSLinkShortcode']);
     }
 
-    public function get_rss_link_shortcode($attributes)
+    public function getRSSLinkShortcode($attributes)
     {
         if ($this->api->isOk() !== true) {
             return $this->api->isOk();

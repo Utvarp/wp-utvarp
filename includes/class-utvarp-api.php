@@ -15,8 +15,8 @@ class Utvarp_Api
         $this->station_uuid = $station_uuid;
 
         $this->api_urls = [
-            'staging' => "https://stage.utvarp.co/api/{$this->api_version}",
-            'live' => "https://app.utvarp.co/api/{$this->api_version}",
+            'staging' => "https://api.stage.utvarp.co/{$this->api_version}",
+            'live' => "https://api.utvarp.co/{$this->api_version}",
         ];
 
         $this->base_api_url = $use_staging == 1 ? $this->api_urls['staging'] : $this->api_urls['live'];
@@ -33,12 +33,12 @@ class Utvarp_Api
 
     private function missingInfosForApi()
     {
-        return $this->station_uuid === false || $this->api_key === false;
+        return $this->api_key === false;
     }
 
     private function generateApiUrl($path)
     {
-        return "{$this->base_api_url}/station/{$this->station_uuid}{$path}?api_token={$this->api_key}";
+        return "{$this->base_api_url}{$path}?api_token={$this->api_key}";
     }
 
     private function call($path)
@@ -54,25 +54,7 @@ class Utvarp_Api
      */
     public function getStation()
     {
-        return $this->call("/");
-    }
-
-    /**
-     * Get the programmation
-     * @return array
-     */
-    public function getProgramming()
-    {
-        return $this->call("/programming");
-    }
-
-    /**
-     * Get all users
-     * @return array
-     */
-    public function getUsers()
-    {
-        return $this->call("/users");
+        return $this->call("/self");
     }
 
     /**
@@ -92,26 +74,6 @@ class Utvarp_Api
     public function getShow($uuid = "empty")
     {
         return $this->call("/shows/{$uuid}");
-    }
-
-    /**
-     * Get all of a show's logs
-     * @param  string $uuid The show's UUID
-     * @return array
-     */
-    public function getShowLogs($uuid = "empty")
-    {
-        return $this->call("/shows/{$uuid}/logs");
-    }
-
-    /**
-     * Get a show's logs entries
-     * @param  string $uuid The show's UUID
-     * @return array
-     */
-    public function getShowLogEntries($uuid = "empty", $log = "empty")
-    {
-        return $this->call("/shows/{$uuid}/logs/{$log}/entries");
     }
 
     /**
