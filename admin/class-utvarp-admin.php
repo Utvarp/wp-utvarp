@@ -85,7 +85,7 @@ class Utvarp_Admin
     {
         add_menu_page(
             "Útvarp's options",
-            'Útvarp',
+            'Options',
             'manage_options',
             'utvarp',
             array( $this, 'render_utvarp_setting_page' ),
