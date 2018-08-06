@@ -11,7 +11,13 @@ jQuery(document).ready(function($) {
 	            'to': $("#utvarp-music-entries-search-date-to").val(),
 	        },
 	        success:function(data) {
-	            utvarp.results = JSON.parse(data)
+	        	parsed = JSON.parse(data);
+	            utvarp.results = parsed.results;
+
+	            $('#utvarp-results-table').append(
+				    $.map(utvarp.results, function (entry, index) {
+				    	return '<tr><td>' + entry.when + '</td><td>' + entry.song + '</td><td>' + entry.artist + '</td></tr>';
+				}).join());
 	        }
 	    });
     });
