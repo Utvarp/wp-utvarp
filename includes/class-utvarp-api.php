@@ -65,9 +65,9 @@ class Utvarp_Api
      * Get all shows
      * @return array
      */
-    public function getShows()
+    public function getShows(bool $active = true)
     {
-        return $this->call("/shows");
+        return $this->call("/shows", ['active' => $active]);
     }
 
     /**
