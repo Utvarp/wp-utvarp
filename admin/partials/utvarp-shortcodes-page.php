@@ -15,6 +15,7 @@ if (! current_user_can('manage_options')) {
     <p>
         <ul>
             <li>Return a show's podcast URL: <code>[utvarp_get_rss_link uuid=SHOW_IDENTIFIER]</code></li>
+            <li>Return a list of the last 10 episodes for a show, with a player.<code>[utvarp_show_player uuid=SHOW_IDENTIFIER]</code></li>
         </ul>
     </p>
 </div>
