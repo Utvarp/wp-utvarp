@@ -41,7 +41,8 @@ class Utvarp
             $this->api_version,
             get_option('utvarp_api_key'),
             get_option('utvarp_station_uuid'),
-            get_option('utvarp_stage_api')
+            get_option('utvarp_stage_api'),
+            get_option('utvarp_local_api')
         );
     }
  

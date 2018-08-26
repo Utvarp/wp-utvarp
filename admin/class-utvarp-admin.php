@@ -27,6 +27,7 @@ class Utvarp_Admin
     {
         register_setting('utvarp', 'utvarp_api_key');
         register_setting('utvarp', 'utvarp_stage_api');
+        register_setting('utvarp', 'utvarp_local_api');
         register_setting('utvarp', 'utvarp_station_uuid');
 
         add_settings_section(
@@ -59,6 +60,14 @@ class Utvarp_Admin
             'utvarp',
             'utvarp_api_section'
         );
+
+        add_settings_field(
+            'utvarp_local_api',
+            __('Use local API (development only)', 'utvarp'),
+            array( $this, 'render_local_api_field' ),
+            'utvarp',
+            'utvarp_api_section'
+        );
     }
 
     public function render_api_section()
@@ -79,6 +88,11 @@ class Utvarp_Admin
     public function render_stage_api_field()
     {
         require_once plugin_dir_path(__FILE__) . 'partials/utvarp-settings-stage-api-field.php';
+    }
+
+    public function render_local_api_field()
+    {
+        require_once plugin_dir_path(__FILE__) . 'partials/utvarp-settings-local-api-field.php';
     }
 
     public function add_utvarp_admin_pages()

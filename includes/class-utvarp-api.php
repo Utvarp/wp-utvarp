@@ -8,7 +8,7 @@ class Utvarp_Api
     protected $base_api_url;
     protected $api_urls;
 
-    public function __construct($version, $key, $station_uuid, $use_staging)
+    public function __construct($version, $key, $station_uuid, $use_staging, $use_local = false)
     {
         $this->api_version = $version;
         $this->api_key = $key;
@@ -17,9 +17,18 @@ class Utvarp_Api
         $this->api_urls = [
             'staging' => "https://api.stage.utvarp.co/{$this->api_version}",
             'live' => "https://api.utvarp.co/{$this->api_version}",
+            'local' => "http://api.utvarp.co.test/{$this->api_version}",
         ];
 
-        $this->base_api_url = $use_staging == 1 ? $this->api_urls['staging'] : $this->api_urls['live'];
+        $this->base_api_url = $this->api_urls['live'];
+
+        if ($use_staging == true) {
+            $this->base_api_url = $this->api_urls['staging'];
+        }
+
+        if ($use_local == true) {
+            $this->base_api_url = $this->api_urls['local'];
+        }
     }
 
     public function isOk()
