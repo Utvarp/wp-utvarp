@@ -36,14 +36,18 @@ class Utvarp_Api
         return $this->api_key === false;
     }
 
-    private function generateApiUrl($path)
+    private function generateApiUrl($path, array $parameters)
     {
-        return "{$this->base_api_url}{$path}?api_token={$this->api_key}";
+        $parameters['api_token'] = $this->api_key;
+        $parameters = http_build_query($parameters);
+
+        $url = "{$this->base_api_url}{$path}?{$parameters}";
+        return $url;
     }
 
-    private function call($path)
+    private function call($path, array $parameters = [])
     {
-        $response = wp_remote_get($this->generateApiUrl($path));
+        $response = wp_remote_get($this->generateApiUrl($path, $parameters));
         $body = wp_remote_retrieve_body($response);
         return json_decode($body);
     }
