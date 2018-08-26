@@ -104,7 +104,7 @@ class Utvarp_Admin
 
         add_submenu_page(
             'utvarp',
-            e('List of added shows', 'utvarp'),
+            e('List of active shows', 'utvarp'),
             e('Shows', 'utvarp'),
             'manage_options',
             'utvarp-shows',
