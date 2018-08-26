@@ -85,12 +85,21 @@ class Utvarp_Admin
     {
         add_menu_page(
             "Útvarp's options",
-            'Options',
+            'Útvarp',
             'manage_options',
             'utvarp',
-            array( $this, 'render_utvarp_setting_page' ),
+            array( $this, 'render_utvarp_home_page' ),
             plugin_dir_url(__FILE__) . 'images/radio-icon-by-Catalin-Fertu-from-flaticon.png',
             81
+        );
+
+        add_submenu_page(
+            'utvarp',
+            e('Plugin settings', 'utvarp'),
+            e('Settings', 'utvarp'),
+            'manage_options',
+            'utvarp-settings',
+            array( $this, 'render_utvarp_setting_page' )
         );
 
         add_submenu_page(
@@ -110,6 +119,11 @@ class Utvarp_Admin
             'utvarp-shortcodes',
             array( $this, 'render_utvarp_shortcodes_page' )
         );
+    }
+
+    public function render_utvarp_home_page()
+    {
+        require_once plugin_dir_path(__FILE__) . 'partials/utvarp-home-page.php';
     }
 
     public function render_utvarp_shortcodes_page()
