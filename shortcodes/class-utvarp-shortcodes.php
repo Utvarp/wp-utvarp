@@ -1,4 +1,6 @@
 <?php
+
+use Vinelab\Rss\Rss;
  
 class Utvarp_Shortcodes
 {
@@ -23,8 +25,23 @@ class Utvarp_Shortcodes
         if ($this->api->isOk() !== true) {
             return $this->api->isOk();
         }
+
+        $show = $this->getShow($attributes);
+
+        if (is_string($show)) {
+            return $show;
+        }
+
+        $rss = new Rss();
+        $feed = $rss->feed($show->podcasts_rss_url);
+
+        $output="";
+
+        foreach ($feed->articles as $item) {
+            $output .= "<h3>{$item->title}<h3><p><audio controls><source src='{$item->enclosure}' type='audio/mpeg'></audio></p>";
+        }
         
-        return "ok";
+        return $output;
     }
 
     public function getRSSLinkShortcode($attributes)
