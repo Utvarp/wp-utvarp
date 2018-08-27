@@ -7,7 +7,7 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- * 
+ *
  * Hello Utvarp is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
  * or FITNESS FOR A PARTICULAR PURPOSE.
@@ -29,6 +29,7 @@ if (! defined('WPINC')) {
     die;
 }
 
+require __DIR__ . '/vendor/autoload.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-utvarp.php';
  
 function run_utvarp()
