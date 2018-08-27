@@ -13,6 +13,7 @@ class Utvarp_Api
         $this->api_version = $version;
         $this->api_key = $key;
         $this->station_uuid = $station_uuid;
+        $this->location = null;
 
         $this->api_urls = [
             'staging' => "https://api.stage.utvarp.co/{$this->api_version}",
@@ -24,10 +25,12 @@ class Utvarp_Api
 
         if ($use_staging == true) {
             $this->base_api_url = $this->api_urls['staging'];
+            $this->location = "staging";
         }
 
         if ($use_local == true) {
             $this->base_api_url = $this->api_urls['local'];
+            $this->location = "local";
         }
     }
 
@@ -48,6 +51,11 @@ class Utvarp_Api
     private function generateApiUrl($path, array $parameters)
     {
         $parameters['api_token'] = $this->api_key;
+
+        if (!is_null($this->location)) {
+            $parameters['location'] = $this->location;
+        }
+
         $parameters = http_build_query($parameters);
 
         $url = "{$this->base_api_url}{$path}?{$parameters}";
