@@ -38,7 +38,7 @@ class Utvarp_Shortcodes
         $output="";
 
         foreach ($feed->articles as $item) {
-            $output .= "<h3>{$item->title}<h3><p><audio controls><source src='{$item->enclosure}' type='audio/mpeg'></audio></p>";
+            $output .= "<h1 class='utvarp-latest-podcasts-title'>{$item->title}<h1><p class='utvarp-latest-podcasts-paragraph'><audio controls class='utvarp-latest-podcasts-audio'><source src='{$item->enclosure}' type='audio/mpeg'></audio></p>";
         }
         
         return $output;
