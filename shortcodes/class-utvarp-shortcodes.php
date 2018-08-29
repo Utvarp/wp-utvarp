@@ -73,6 +73,8 @@ class Utvarp_Shortcodes
 
         if (is_array($show)) {
             return $show['error'];
+        } elseif (is_null($show)) {
+            return "Error";
         } else {
             return $show;
         };
